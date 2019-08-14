@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
-import { newUserApi } from "../Actions/Index";
+import { newUserApi, defaultError } from "../Actions/Index";
+import Modal from "../Modal/Modal";
 import {
   email,
   required,
@@ -14,7 +15,17 @@ class SignUp extends Component {
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
+    this.state = { showModal: false };
   }
+
+  handlerModal = () => {
+    this.setState({ showModal: true });
+  };
+  closeModal = () => {
+    this.props.defaultError();
+    this.setState({ showModal: false });
+  };
+
   renderError({ error, touched }) {
     if (touched && error) {
       return (
@@ -44,8 +55,9 @@ class SignUp extends Component {
     );
   };
 
-  onSubmit(formValues) { console.log(formValues)
-    this.props.newUserApi(formValues.email,formValues.passwordSing);
+  onSubmit(formValues) {
+    console.log(formValues);
+    this.props.newUserApi(formValues.email, formValues.passwordSing);
   }
   render() {
     return (
@@ -224,6 +236,17 @@ class SignUp extends Component {
             </form>
           </div>
         </div>
+        {this.props.loginError.message
+          ? (this.handlerModal,
+            (
+              <Modal
+                title="Ups Something Goes Wrong!!"
+                content={this.props.loginError.message}
+                onDismiss={() => this.closeModal}
+              />
+            ))
+          : null}
+        }
       </>
     );
   }
@@ -249,13 +272,14 @@ const validate = formValues => {
 
 const mapStateToProps = state => {
   return {
-    newUser: state.newUser.newUser
+    newUser: state.newUser.newUser,
+    loginError: state.newUser.loginError
   };
 };
 
 export default connect(
   mapStateToProps,
-  { newUserApi }
+  { newUserApi, defaultError }
 )(
   reduxForm({
     form: "singUpForm",

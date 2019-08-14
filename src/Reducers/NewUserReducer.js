@@ -27,6 +27,11 @@ export default (state = initialState, action) => {
         ...state,
         loginError: action.payload
       };
+      case "DEFAULT_ERROR":
+      return {
+        ...state,
+        loginError: " "
+      };
       case "RESET":
       return initialState;
       
