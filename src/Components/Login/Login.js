@@ -41,7 +41,7 @@ class Login extends Component {
   };
 
   onSubmit(formValues) {
-    this.props.loginUser(formValues.email, formValues.password_sign);
+    this.props.loginUser(formValues.email, formValues.passwordSing);
   }
   render() {
     return (
@@ -65,7 +65,7 @@ class Login extends Component {
                       Username
                     </label>
                     <Field
-                      name="Email"
+                      name="email"
                       type="email"
                       label="example@gmail.com"
                       className="input"
@@ -77,7 +77,7 @@ class Login extends Component {
                       Password
                     </label>
                     <Field
-                      name="Password_sign"
+                      name="passwordSing"
                       type="password"
                       label="*******"
                       className="input"
@@ -102,8 +102,8 @@ class Login extends Component {
 
 const validate = formValues => {
   const errors = {};
-  errors.Email = email(formValues.email);
-  errors.Password_sign = required(formValues.password_sign);
+  errors.email = email(formValues.email);
+  errors.passwordSing = required(formValues.passwordSing);
   return errors;
 };
 

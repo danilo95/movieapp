@@ -5,10 +5,16 @@ import { newUserApi } from "../Actions/Index";
 import {
   email,
   required,
-  emailCheck,
-  numberValidation
+  passCheck,
+  numberValidation,
+  inputValidationLength,
+  validURL
 } from "../../Validation";
-class Login extends Component {
+class SignUp extends Component {
+  constructor(props) {
+    super(props);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
   renderError({ error, touched }) {
     if (touched && error) {
       return (
@@ -38,8 +44,8 @@ class Login extends Component {
     );
   };
 
-  onSubmit(formValues) {
-    this.props.newUserApi(formValues.email, formValues.password_sign);
+  onSubmit(formValues) { console.log(formValues)
+    this.props.newUserApi(formValues.email,formValues.passwordSing);
   }
   render() {
     return (
@@ -47,7 +53,7 @@ class Login extends Component {
         <div className="login-wrap">
           <div className="login-html">
             <form
-              onSubmit={() => this.props.handleSubmit(this.onSubmit)}
+              onSubmit={this.props.handleSubmit(this.onSubmit)}
               className="ui form"
             >
               <input
@@ -66,10 +72,10 @@ class Login extends Component {
                 <div className="sign-in-htm">
                   <div className="group">
                     <label htmlFor="user" className="label">
-                      Firstname
+                      Firstanem
                     </label>
                     <Field
-                      name="Firstname"
+                      name="firstanem"
                       type="text"
                       label="Firstname"
                       className="input"
@@ -81,7 +87,7 @@ class Login extends Component {
                       Last name
                     </label>
                     <Field
-                      name="Lastname"
+                      name="lastname"
                       type="text"
                       label="Last name"
                       className="input"
@@ -93,33 +99,34 @@ class Login extends Component {
                       E-Mail
                     </label>
                     <Field
-                      name="Email"
+                      name="email"
                       type="email"
                       label="example@gmail.com"
                       className="input"
                       component={this.renderInput}
                     />
                   </div>
-                  <div className="group">
-                    <label htmlFor="confirm_email" className="label">
-                      Confirm E-Mail
-                    </label>
-                    <Field
-                      name="Confirm_email"
-                      type="email"
-                      label="example@gmail.com"
-                      className="input"
-                      component={this.renderInput}
-                    />
-                  </div>
+
                   <div className="group">
                     <label htmlFor="pass" className="label">
                       Password
                     </label>
                     <Field
-                      name="Password_sign"
+                      name="passwordSing"
                       type="password"
                       label="*******"
+                      className="input"
+                      component={this.renderInput}
+                    />
+                  </div>
+                  <div className="group">
+                    <label htmlFor="confirmPass" className="label">
+                      Confirm Password
+                    </label>
+                    <Field
+                      name="confirmPass"
+                      type="password"
+                      label="*****"
                       className="input"
                       component={this.renderInput}
                     />
@@ -129,7 +136,7 @@ class Login extends Component {
                       Telephone Number
                     </label>
                     <Field
-                      name="Phone"
+                      name="phone"
                       type="text"
                       label="Put your personal Number"
                       className="input"
@@ -137,11 +144,11 @@ class Login extends Component {
                     />
                   </div>
                   <div className="group">
-                    <label htmlFor="user" className="label">
+                    <label htmlFor="personalSite" className="label">
                       Personal Site
                     </label>
                     <Field
-                      name="PesonalSite"
+                      name="personalSite"
                       type="text"
                       label="pesonal Site"
                       className="input"
@@ -162,10 +169,10 @@ class Login extends Component {
                   </div>
                   <div className="group">
                     <label htmlFor="user" className="label">
-                      Address
+                      Adress
                     </label>
                     <Field
-                      name="Address"
+                      name="adress"
                       type="textarea"
                       label="Address"
                       className="input"
@@ -173,24 +180,37 @@ class Login extends Component {
                     />
                   </div>
                   <div className="group">
-                    <label htmlFor="user" className="label">
-                      Gender
-                    </label>
-                    <Field className="input" component="select" name="gender">
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
-                    </Field>
+                    <div className="Checks">
+                      <label htmlFor="user" className="label">
+                        Male
+                      </label>
+                      <Field
+                        name="Male"
+                        type="checkbox"
+                        label="Male"
+                        component={this.renderInput}
+                      />
+                      <label htmlFor="user" className="label">
+                        Female
+                      </label>
+                      <Field
+                        name="Female"
+                        type="checkbox"
+                        label="Female"
+                        component={this.renderInput}
+                      />
+                    </div>
                   </div>
                   <div className="group">
-                    <label htmlFor="accept" className="label">
-                      Aceept the Terms:
-                    </label>
-                    <div className="group">
+                    <div className="Checks">
+                      <label htmlFor="accept" className="label">
+                        Aceept the Terms:
+                      </label>
+
                       <Field
                         name="accept"
                         type="checkbox"
-                        label="Address"
-                        className="input"
+                        label="accept"
                         component={this.renderInput}
                       />
                     </div>
@@ -211,15 +231,18 @@ class Login extends Component {
 
 const validate = formValues => {
   const errors = {};
-  errors.Email = email(formValues.email);
-  errors.Password_sign = required(formValues.password_sign);
-  errors.Firstname = required(formValues.Firstname);
-  errors.Lastname = required(formValues.Lastname);
-  errors.Confirm_email = emailCheck(formValues.email, formValues.confirm_email);
-  errors.Phone = numberValidation(formValues.phone);
-  errors.PesonalSite = required(formValues.pesonalSite);
-  errors.AboutMe = required(formValues.aboutMe);
-  errors.Address = required(formValues.Address);
+  errors.email = email(formValues.email);
+  errors.passwordSing = required(formValues.passwordSing);
+  errors.firstanem = inputValidationLength(formValues.firstanem);
+  errors.lastname = inputValidationLength(formValues.lastname);
+  errors.confirmPass = passCheck(
+    formValues.passwordSing,
+    formValues.confirmPass
+  );
+  errors.phone = numberValidation(formValues.phone);
+  errors.personalSite = validURL(formValues.personalSite);
+  errors.adress = required(formValues.adress);
+  errors.accept = required(formValues.accept);
 
   return errors;
 };
@@ -237,5 +260,5 @@ export default connect(
   reduxForm({
     form: "singUpForm",
     validate
-  })(Login)
+  })(SignUp)
 );

@@ -5,6 +5,9 @@ body {
   font: 600 16px/18px "Open Sans", sans-serif;
 }
 
+.Checks{
+  display: inline-flex;
+}
 *,
 :after,
 :before {
@@ -96,7 +99,8 @@ a {
 
 .login-form .group .label,
 .login-form .group .input,
-.login-form .group .button {
+.login-form .group .button
+ {
   width: 100%;
   color: #fff;
   display: block;
@@ -191,9 +195,7 @@ a {
   text-align: center;
 }
 
-input[type="checkbox"] {
-  margin: auto;
-}
+
 /*responsive */
 @media (max-width: 750px) {
   .login-wrap {

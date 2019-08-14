@@ -1,17 +1,22 @@
 import BackendApi from './MoviesApi';
 
 
-export const newUser = (userEmail,userPassword) => {
-  let result = BackendApi.post('api/register', {
+export const newUser = (userEmail,userPassword) => { 
+  console.log('email',userEmail)
+  console.log('password',userPassword)
+  let result = BackendApi.post('/api/register', {
     email: userEmail,
-    password: userPassword
+    password: userPassword,
+    headers: {
+      'Content-Type': 'application/json',
+  }
   }).then(response => {
       console.log(response.data)
       return response.data;
     })
     .catch(error => {
-      console.log('errror',error)
-      return error;
+      console.log(error.response.data)
+      return handleError(error)
     });
 
   return result;
@@ -39,8 +44,8 @@ export const login = (userEmail,userPassword) => {
 const handleError = errorHttp => {
   switch (errorHttp.response.status) {
     case 400:
-      return {status:400,message:"We dont found the information,please Try Again"};
+      return {status:400,message:errorHttp.response.data.error};
     default:
-      return {status:500,message:"Something Goes Wrong!! Pleaste try later"};
+      return {status:500,message:errorHttp.response.data.error};
   }
 };
