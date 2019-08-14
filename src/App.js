@@ -6,10 +6,13 @@ import Login from "./Components/Login/Login";
 import SignUp from "./Components/Sign Up/SignUp";
 import Homepage from "./Components/Homepage/Homepage";
 import History from "./Components/History/History";
-function App() {
+import HomeHeader from "./Components/Homepage/HomeHeader";
+import { connect } from "react-redux";
+function App(props) {
   return (
     <Router history={History}>
-      <HeaderSite />
+      {!props.isLogin ? <HeaderSite /> : <HomeHeader />}
+
       <Route path="/" exact component={Index} />
       <Route path="/login" exact component={Login} />
       <Route path="/signup" exact component={SignUp} />
@@ -18,4 +21,13 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    isLogin: state.newUser.isLogin
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  {}
+)(App);

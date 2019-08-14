@@ -1,6 +1,7 @@
 const initialState = {
   newUser: null,
-  loginResponse: null,
+  isLogin: false,
+  email: null,
   loginError: " "
 };
 export default (state = initialState, action) => {
@@ -13,13 +14,22 @@ export default (state = initialState, action) => {
     case "LOGIN":
       return {
         ...state,
-        loginResponse: action.payload
+        isLogin: true,
+        loginError: " "
+      };
+    case "GET_SESSION_EMAIL":
+      return {
+        ...state,
+        email: action.payload
       };
     case "LOGIN_ERRROR":
       return {
         ...state,
         loginError: action.payload
       };
+      case "RESET":
+      return initialState;
+      
     default:
       return state;
   }

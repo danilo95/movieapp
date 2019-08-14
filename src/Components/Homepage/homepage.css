@@ -1,0 +1,97 @@
+.wrap {
+  float: right;
+ 
+ margin-top: 36px;
+}
+
+.card-container {
+  width: 290px;
+  height: 370px;
+  background-color: #ECEFF1;
+  position: relative;
+  z-index: -2;
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.top-card {
+  background-color: #5494EA;
+  height: 130px;
+  position: relative;
+  z-index: -3;
+  overflow: none;
+}
+
+.top-card2 {
+  background-color: rgba(0,0,0,0.12);
+  height: 80px;
+  width: 100%;
+  top: 0;
+  position: absolute;
+  z-index: -3;
+}
+
+.circle {
+  width: 200px;
+  height: 200px;
+  background-color: #ECEFF1;
+  position: absolute;
+  border-radius: 50%;
+  top: 135px;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: -1;
+}
+
+
+.image-class {
+  border-radius: 50%;
+  z-index: 3;
+  width: 190px;
+  height: 185px;
+  position: absolute;
+  left:50%;
+  transform: translate(-50%, 0);
+  margin-top: -90.5px;
+  object-fit: cover;
+}
+
+.title-text {
+  position: relative;
+  z-index: 4;
+  margin-top: 115px;
+  font-size: 23px;
+  font-weight: 600;
+  color: #263238;
+}
+
+.info-text {
+  position: relative;
+  z-index: 4;
+  margin-top: 12px;
+  font-size: 18px;
+  color: #263238;
+}
+
+
+.b-r {
+  border-right: 1px solid rgba(100, 100, 100, 0.3);
+}
+
+.btn-log-out{
+  background-color: red; 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button-section{
+  margin-top: -67px;
+    margin-left: 25%;
+}

@@ -3,14 +3,17 @@ import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import { email, required } from "../../Validation";
 import { loginUser } from "../Actions/Index";
-
+import History from "../History/History";
 import "./login.css";
 class Login extends Component {
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
   }
-
+componentDidMount(){
+  (!this.props.isLogin)?
+  History.push("/login"):History.push("/Homepage/Homepage")
+}
   renderError({ error, touched }) {
     if (touched && error) {
       return (
@@ -109,7 +112,8 @@ const validate = formValues => {
 
 const mapStateToProps = state => {
   return {
-    loginError: state.newUser.loginError
+    loginError: state.newUser.loginError,
+    isLogin: state.newUser.isLogin
   };
 };
 export default connect(

@@ -55,7 +55,9 @@ export const validURL = str => {
     "i"
   );
 
-  if (!!pattern.test(str) === false) {
+  if (!str) {
+    error = true;
+  } else if(!pattern.test(str)) {
     return (error = "Invalid URL");
   }
 };
