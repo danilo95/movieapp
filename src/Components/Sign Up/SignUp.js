@@ -9,7 +9,8 @@ import {
   passCheck,
   numberValidation,
   inputValidationLength,
-  validURL
+  validURL,
+  birthdayValidation
 } from "../../Validation";
 class SignUp extends Component {
   constructor(props) {
@@ -75,11 +76,11 @@ class SignUp extends Component {
                 className="sign-in"
                 checked
               />
+
               <label htmlFor="tab-1" className="tab">
                 Sign In
               </label>
-              <input id="tab-2" type="radio" name="tab" className="sign-up" />
-              <label htmlFor="tab-2" className="tab" />
+
               <div className="login-form">
                 <div className="sign-in-htm">
                   <div className="group">
@@ -181,6 +182,18 @@ class SignUp extends Component {
                   </div>
                   <div className="group">
                     <label htmlFor="user" className="label">
+                      Birthday Date
+                    </label>
+                    <Field
+                      name="birthdayDate"
+                      type="date"
+                      label="birthdayDate"
+                      className="input"
+                      component={this.renderInput}
+                    />
+                  </div>
+                  <div className="group">
+                    <label htmlFor="user" className="label">
                       Adress
                     </label>
                     <Field
@@ -197,18 +210,18 @@ class SignUp extends Component {
                         Male
                       </label>
                       <Field
-                        name="Male"
-                        type="checkbox"
-                        label="Male"
+                        name="gender"
+                        type="radio"
+                        value="male"
                         component={this.renderInput}
                       />
                       <label htmlFor="user" className="label">
                         Female
                       </label>
                       <Field
-                        name="Female"
-                        type="checkbox"
-                        label="Female"
+                        name="gender"
+                        type="radio"
+                        value="female"
                         component={this.renderInput}
                       />
                     </div>
@@ -266,7 +279,7 @@ const validate = formValues => {
   errors.personalSite = validURL(formValues.personalSite);
   errors.adress = required(formValues.adress);
   errors.accept = required(formValues.accept);
-
+  errors.birthdayDate = birthdayValidation(formValues.birthdayDate);
   return errors;
 };
 

@@ -57,7 +57,26 @@ export const validURL = str => {
 
   if (!str) {
     error = true;
-  } else if(!pattern.test(str)) {
+  } else if (!pattern.test(str)) {
     return (error = "Invalid URL");
   }
+};
+
+export const birthdayValidation = birthday => {
+  if (!birthday) {
+    error = "Required";
+  } else {
+    
+    var today = new Date();
+    var birthDate = new Date(birthday);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+   if(age<18){
+    error = "You MUST have 18 to continue...";
+   }
+  }
+  return error;
 };
