@@ -16,7 +16,12 @@ const MyAcount = props => {
         <p class="title-text">{props.email}</p>
       </div>
       <div className="button-section">
-        <input type="button" className="btn-log-out" value="Log Out" onClick={props.reset} />
+        <input
+          type="button"
+          className="btn-log-out"
+          value="Log Out"
+          onClick={props.reset}
+        />
       </div>
     </div>
   );
@@ -30,5 +35,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  {reset}
+  { reset }
 )(MyAcount);

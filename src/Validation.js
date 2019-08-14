@@ -1,5 +1,5 @@
 let error;
-export const email = value => {
+export const emailValidation = value => {
   !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
     ? (error = "Invalid email address")
     : (error = false);
@@ -66,17 +66,16 @@ export const birthdayValidation = birthday => {
   if (!birthday) {
     error = "Required";
   } else {
-    
     var today = new Date();
     var birthDate = new Date(birthday);
     var age = today.getFullYear() - birthDate.getFullYear();
     var m = today.getMonth() - birthDate.getMonth();
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
+      age--;
     }
-   if(age<18){
-    error = "You MUST have 18 to continue...";
-   }
+    if (age < 18) {
+      error = "You MUST have 18 to continue...";
+    }
   }
   return error;
 };

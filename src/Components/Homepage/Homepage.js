@@ -1,6 +1,7 @@
 import React from "react";
 import History from "../History/History";
 import { connect } from "react-redux";
+import MovieList from '../MovieList/MovieList';
 class Homepage extends React.Component {
   componentDidMount() {
     !this.props.isLogin
@@ -8,7 +9,9 @@ class Homepage extends React.Component {
       : History.push("/Homepage/Homepage");
   }
   render() {
-    return <div>Hola soy el home dude</div>;
+    return <>
+      <MovieList/>
+    </>;
   }
 }
 

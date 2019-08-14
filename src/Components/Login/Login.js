@@ -1,19 +1,29 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
-import { email, required } from "../../Validation";
-import { loginUser } from "../Actions/Index";
+import { emailValidation, required } from "../../Validation";
+import { loginUser,defaultError } from "../Actions/Index";
 import History from "../History/History";
+import Modal from "../Modal/Modal";
 import "./login.css";
 class Login extends Component {
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
+    this.state = { showModal: false };
   }
-componentDidMount(){
-  (!this.props.isLogin)?
-  History.push("/login"):History.push("/Homepage/Homepage")
-}
+  componentDidMount() {
+    !this.props.isLogin
+      ? History.push("/login")
+      : History.push("/Homepage/Homepage");
+  }
+  handlerModal = () => {
+    this.setState({ showModal: true });
+  };
+  closeModal = () => {
+    this.props.defaultError();
+    this.setState({ showModal: false });
+  };
   renderError({ error, touched }) {
     if (touched && error) {
       return (
@@ -91,22 +101,32 @@ componentDidMount(){
                   <div className="group">
                     <input type="submit" className="button" value="Sign In" />
                   </div>
-                  <h3>{this.props.loginError.message}</h3>
                   <div className="hr" />
                 </div>
               </div>
             </form>
           </div>
         </div>
+        {this.props.loginError.message
+          ? (this.handlerModal,
+            (
+              <Modal
+                title="Ups Something Goes Wrong!!"
+                content={this.props.loginError.message}
+                onDismiss={() => this.closeModal}
+              />
+            ))
+          : null}
+        }
       </>
     );
   }
 }
 
-const validate = formValues => {
+const validate = ({ email, passwordSing }) => {
   const errors = {};
-  errors.email = email(formValues.email);
-  errors.passwordSing = required(formValues.passwordSing);
+  errors.email = emailValidation(email);
+  errors.passwordSing = required(passwordSing);
   return errors;
 };
 
@@ -118,7 +138,7 @@ const mapStateToProps = state => {
 };
 export default connect(
   mapStateToProps,
-  { loginUser }
+  { loginUser,defaultError }
 )(
   reduxForm({
     form: "loginForm",

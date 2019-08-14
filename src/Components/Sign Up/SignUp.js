@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { newUserApi, defaultError } from "../Actions/Index";
 import Modal from "../Modal/Modal";
 import {
-  email,
+  emailValidation,
   required,
   passCheck,
   numberValidation,
@@ -213,6 +213,7 @@ class SignUp extends Component {
                         name="gender"
                         type="radio"
                         value="male"
+                        
                         component={this.renderInput}
                       />
                       <label htmlFor="user" className="label">
@@ -265,21 +266,21 @@ class SignUp extends Component {
   }
 }
 
-const validate = formValues => {
+const validate = ({email,passwordSing,firstanem,lastname,confirmPass,phone,personalSite,adress,accept,birthdayDate}) => {
   const errors = {};
-  errors.email = email(formValues.email);
-  errors.passwordSing = required(formValues.passwordSing);
-  errors.firstanem = inputValidationLength(formValues.firstanem);
-  errors.lastname = inputValidationLength(formValues.lastname);
+  errors.email = emailValidation(email);
+  errors.passwordSing = required(passwordSing);
+  errors.firstanem = inputValidationLength(firstanem);
+  errors.lastname = inputValidationLength(lastname);
   errors.confirmPass = passCheck(
-    formValues.passwordSing,
-    formValues.confirmPass
+    passwordSing,
+    confirmPass
   );
-  errors.phone = numberValidation(formValues.phone);
-  errors.personalSite = validURL(formValues.personalSite);
-  errors.adress = required(formValues.adress);
-  errors.accept = required(formValues.accept);
-  errors.birthdayDate = birthdayValidation(formValues.birthdayDate);
+  errors.phone = numberValidation(phone);
+  errors.personalSite = validURL(personalSite);
+  errors.adress = required(adress);
+  errors.accept = required(accept);
+  errors.birthdayDate = birthdayValidation(birthdayDate);
   return errors;
 };
 

@@ -1,7 +1,8 @@
 .wrap {
-  float: right;
- 
- margin-top: 36px;
+  position: fixed;
+    right: 0px;
+    margin-top: -30px;
+    z-index: 100;
 }
 
 .card-container {
