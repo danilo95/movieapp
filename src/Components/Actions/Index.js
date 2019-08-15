@@ -40,3 +40,7 @@ export const getPopularMovies = () => async dispatch => {
     dispatch({ type: "MOVIES", payload: response });
   }
 };
+
+export const loading = () => {
+  return { type: "IS_LOADING", payload: true };
+};

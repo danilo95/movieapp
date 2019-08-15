@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import { emailValidation, required } from "../../Validation";
-import { loginUser,defaultError } from "../Actions/Index";
+import { loginUser,defaultError,loading } from "../Actions/Index";
+import Loading from "../Loading/Loading";
 import History from "../History/History";
 import Modal from "../Modal/Modal";
 import "./login.css";
@@ -13,6 +14,7 @@ class Login extends Component {
     this.state = { showModal: false };
   }
   componentDidMount() {
+    
     !this.props.isLogin
       ? History.push("/login")
       : History.push("/Homepage/Homepage");
@@ -54,7 +56,10 @@ class Login extends Component {
   };
 
   onSubmit(formValues) {
+    console.log('loading',this.props.loadingState)
+    this.props.loading()
     this.props.loginUser(formValues.email, formValues.passwordSing);
+    
   }
   render() {
     return (
@@ -102,7 +107,7 @@ class Login extends Component {
                     <input type="submit" className="button" value="Sign In" />
                   </div>
                   <div className="hr" />
-                  <h1>{this.props.loading?'loading':null}</h1>
+                  {this.props.loadingState?<Loading/>:null}
                 </div>
               </div>
             </form>
@@ -135,12 +140,12 @@ const mapStateToProps = state => {
   return {
     loginError: state.newUser.loginError,
     isLogin: state.newUser.isLogin,
-    loading: state.newUser.loading
+    loadingState: state.newUser.loading
   };
 };
 export default connect(
   mapStateToProps,
-  { loginUser,defaultError }
+  { loginUser,defaultError,loading }
 )(
   reduxForm({
     form: "loginForm",
