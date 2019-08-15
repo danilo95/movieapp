@@ -19,9 +19,10 @@ class SignUp extends Component {
     this.state = { showModal: false };
   }
 
-   colors = [ { color: 'Red', value: 'ff0000' },
-  { color: 'Green', value: '00ff00' },
-  { color: 'Blue', value: '0000ff' } ]
+  Countries = [
+    { id: "1", value: "El Salvador" },
+    { id: "2", value: "Mexico" }
+  ];
   handlerModal = () => {
     this.setState({ showModal: true });
   };
@@ -36,9 +37,9 @@ class SignUp extends Component {
         <div>
           <div className="error_alert">
             <i className="fa fa-exclamation-triangle" aria-hidden="true">
-              -
+            -{error}
             </i>
-            {error}
+           
           </div>
         </div>
       );
@@ -54,6 +55,21 @@ class SignUp extends Component {
           type={type}
           className={className}
         />
+        {this.renderError(meta)}
+      </div>
+    );
+  };
+  renderSelect = ({ input, options, meta,className }) => {
+    return (
+      <div className="field">
+        <select {...input}  className={className}>
+       
+          {options.map(option => (
+            <option key={option.id} value={JSON.stringify(option.value)}>
+              {option.value}
+            </option>
+          ))}
+        </select>
         {this.renderError(meta)}
       </div>
     );
@@ -199,12 +215,11 @@ class SignUp extends Component {
                     <label htmlFor="user" className="label">
                       Adress
                     </label>
-                    <Field
-                      name="adress"
-                      type="select"
+                    <Field 
+                     name="country"
                       className="input"
-                      options={this.colors}
-                      component={this.renderInput}
+                      component={this.renderSelect}
+                      options={this.Countries}
                     />
                   </div>
                   <div className="group">
@@ -278,7 +293,9 @@ const validate = ({
   personalSite,
   adress,
   accept,
-  birthdayDate
+  birthdayDate,
+  country,
+  gender
 }) => {
   const errors = {};
   errors.email = emailValidation(email);
@@ -291,6 +308,7 @@ const validate = ({
   errors.adress = required(adress);
   errors.accept = required(accept);
   errors.birthdayDate = birthdayValidation(birthdayDate);
+  errors.country=required(country);
   return errors;
 };
 
