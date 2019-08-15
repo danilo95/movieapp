@@ -102,6 +102,7 @@ class Login extends Component {
                     <input type="submit" className="button" value="Sign In" />
                   </div>
                   <div className="hr" />
+                  <h1>{this.props.loading?'loading':null}</h1>
                 </div>
               </div>
             </form>
@@ -133,7 +134,8 @@ const validate = ({ email, passwordSing }) => {
 const mapStateToProps = state => {
   return {
     loginError: state.newUser.loginError,
-    isLogin: state.newUser.isLogin
+    isLogin: state.newUser.isLogin,
+    loading: state.newUser.loading
   };
 };
 export default connect(

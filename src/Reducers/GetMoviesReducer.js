@@ -10,10 +10,10 @@ export default (state = initialState, action) => {
         movies: action.payload,
         moviesError: " "
       };
-      case "GET_MOVIES_ERRROR":
+    case "GET_MOVIES_ERRROR":
       return {
         ...state,
-        moviesError: action.payload,
+        moviesError: action.payload
       };
     default:
       return state;

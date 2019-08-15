@@ -5,5 +5,5 @@ import GetMoviesReducer from "./GetMoviesReducer";
 export default combineReducers({
   form: formReducer,
   newUser: NewUserReducer,
-  movies:GetMoviesReducer
+  movies: GetMoviesReducer
 });

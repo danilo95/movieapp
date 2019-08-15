@@ -181,7 +181,7 @@ class SignUp extends Component {
                     />
                   </div>
                   <div className="group">
-                    <label htmlFor="user" className="label">
+                    <label htmlFor="birthdayDate" className="label">
                       Birthday Date
                     </label>
                     <Field
@@ -213,7 +213,6 @@ class SignUp extends Component {
                         name="gender"
                         type="radio"
                         value="male"
-                        
                         component={this.renderInput}
                       />
                       <label htmlFor="user" className="label">
@@ -266,21 +265,30 @@ class SignUp extends Component {
   }
 }
 
-const validate = ({email,passwordSing,firstanem,lastname,confirmPass,phone,personalSite,adress,accept,birthdayDate}) => {
+const validate = ({
+  email,
+  passwordSing,
+  firstanem,
+  lastname,
+  confirmPass,
+  phone,
+  personalSite,
+  adress,
+  accept,
+  birthdayDate
+}) => {
   const errors = {};
   errors.email = emailValidation(email);
   errors.passwordSing = required(passwordSing);
   errors.firstanem = inputValidationLength(firstanem);
   errors.lastname = inputValidationLength(lastname);
-  errors.confirmPass = passCheck(
-    passwordSing,
-    confirmPass
-  );
+  errors.confirmPass = passCheck(passwordSing, confirmPass);
   errors.phone = numberValidation(phone);
   errors.personalSite = validURL(personalSite);
   errors.adress = required(adress);
   errors.accept = required(accept);
   errors.birthdayDate = birthdayValidation(birthdayDate);
+  console.log(errors);
   return errors;
 };
 

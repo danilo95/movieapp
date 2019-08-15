@@ -1,4 +1,4 @@
-import { newUser, login,getMovies } from "../MoviesApi/Requests";
+import { newUser, login, getMovies } from "../MoviesApi/Requests";
 import History from "../History/History";
 
 export const newUserApi = (user, password) => async dispatch => {
@@ -31,7 +31,6 @@ export const reset = () => dispatch => {
 export const defaultError = () => dispatch => {
   dispatch({ type: "DEFAULT_ERROR" });
 };
-
 
 export const getPopularMovies = () => async dispatch => {
   const response = await getMovies();

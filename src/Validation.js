@@ -75,6 +75,8 @@ export const birthdayValidation = birthday => {
     }
     if (age < 18) {
       error = "You MUST have 18 to continue...";
+    } else {
+      error = false;
     }
   }
   return error;

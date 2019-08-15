@@ -37,9 +37,13 @@ export const login = (userEmail, userPassword) => {
   return result;
 };
 export const getMovies = () => {
-  let result = MovieApi.get(`/3/movie/popular?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`)
+  let result = MovieApi.get(
+    `/3/movie/popular?api_key=${
+      process.env.REACT_APP_API_KEY
+    }&language=en-US&page=1`
+  )
     .then(response => {
-      console.log(response.data.results)
+      console.log(response.data.results);
       return response.data.results;
     })
     .catch(error => {
@@ -48,8 +52,6 @@ export const getMovies = () => {
 
   return result;
 };
-
-
 
 const handleError = errorHttp => {
   switch (errorHttp.response.status) {

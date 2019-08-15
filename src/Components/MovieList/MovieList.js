@@ -3,33 +3,32 @@ import { connect } from "react-redux";
 import "./movie.css";
 import { getPopularMovies } from "../Actions/Index";
 class MovieList extends React.Component {
-
-  componentDidMount(){
+  componentDidMount() {
     this.props.getPopularMovies();
-    
   }
-  render(){
-  return (<>
-
-  <div class="movies-container">
-{this.props.movies.map((movie, index) => {  
-  return (
-    <div class="movie"> 
-      <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="poster"/>
-    </div>
- );
-})   
-       
-    }
-    </div>
- 
- 
-
-
-  </>
-  )};
-  
-};
+  render() {
+    return (
+      <>
+        <div class="movies-container">
+          {this.props.movies.map((movie, index) => {
+            return (
+              <div class="movie" key={index}>
+                <img
+                  src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                  alt="poster"
+                />
+                <div class="overlay">
+                  <div class="text">{movie.original_title}</div>
+                  <br />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </>
+    );
+  }
+}
 
 const mapStateToProps = state => {
   return {
@@ -39,5 +38,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  {getPopularMovies}
+  { getPopularMovies }
 )(MovieList);

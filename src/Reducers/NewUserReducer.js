@@ -2,6 +2,7 @@ const initialState = {
   newUser: null,
   isLogin: false,
   email: null,
+  loading:true,
   loginError: " "
 };
 export default (state = initialState, action) => {
@@ -9,7 +10,8 @@ export default (state = initialState, action) => {
     case "NEW_USER":
       return {
         ...state,
-        newUser: action.payload
+        newUser: action.payload,
+        loading:false
       };
     case "LOGIN":
       return {
@@ -25,7 +27,7 @@ export default (state = initialState, action) => {
     case "LOGIN_ERRROR":
       return {
         ...state,
-        loginError: action.payload
+        loginError: action.payload,
       };
       case "DEFAULT_ERROR":
       return {
