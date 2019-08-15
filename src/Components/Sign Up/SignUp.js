@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { newUserApi, defaultError } from "../Actions/Index";
+import { Countries, StatesofCountries } from "../DefaultData/DefaultData.js";
 import Modal from "../Modal/Modal";
 import {
   emailValidation,
@@ -16,13 +17,9 @@ class SignUp extends Component {
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
-    this.state = { showModal: false };
+    this.state = { showModal: false, showSubSelect: false };
   }
 
-  Countries = [
-    { id: "1", value: "El Salvador" },
-    { id: "2", value: "Mexico" }
-  ];
   handlerModal = () => {
     this.setState({ showModal: true });
   };
@@ -31,15 +28,21 @@ class SignUp extends Component {
     this.setState({ showModal: false });
   };
 
+  countryStates = e => {
+    if (e.target.value) {
+      this.setState({ showSubSelect: true });
+    } else {
+      this.setState({ showSubSelect: false });
+    }
+  };
   renderError({ error, touched }) {
     if (touched && error) {
       return (
         <div>
           <div className="error_alert">
             <i className="fa fa-exclamation-triangle" aria-hidden="true">
-            -{error}
+              -{error}
             </i>
-           
           </div>
         </div>
       );
@@ -59,11 +62,11 @@ class SignUp extends Component {
       </div>
     );
   };
-  renderSelect = ({ input, options, meta,className }) => {
+  renderSelect = ({ input, options, meta, className }) => {
     return (
       <div className="field">
-        <select {...input}  className={className}>
-       
+        <select {...input} className={className}>
+          <option value="">Select a Country</option>
           {options.map(option => (
             <option key={option.id} value={JSON.stringify(option.value)}>
               {option.value}
@@ -213,15 +216,30 @@ class SignUp extends Component {
                   </div>
                   <div className="group">
                     <label htmlFor="user" className="label">
-                      Adress
+                      Country
                     </label>
-                    <Field 
-                     name="country"
+                    <Field
+                      name="country"
                       className="input"
+                      onChange={event => this.countryStates(event)}
                       component={this.renderSelect}
-                      options={this.Countries}
+                      options={Countries}
                     />
                   </div>
+                  {this.state.showSubSelect ? (
+                    <div className="group">
+                      <label htmlFor="user" className="label">
+                        State
+                      </label>
+                      <Field
+                        name="country"
+                        className="input"
+                        onChange={event => this.countryStates(event)}
+                        component={this.renderSelect}
+                        options={StatesofCountries}
+                      />
+                    </div>
+                  ) : null}
                   <div className="group">
                     <div className="Checks">
                       <label htmlFor="user" className="label">
@@ -307,8 +325,9 @@ const validate = ({
   errors.personalSite = validURL(personalSite);
   errors.adress = required(adress);
   errors.accept = required(accept);
+  errors.accept = required(accept);
   errors.birthdayDate = birthdayValidation(birthdayDate);
-  errors.country=required(country);
+  errors.country = required(country);
   return errors;
 };
 
