@@ -7,6 +7,7 @@ export const newUserApi = (user, password) => async dispatch => {
     dispatch({ type: "LOGIN_ERRROR", payload: response });
   } else {
     dispatch({ type: "NEW_USER", payload: response });
+    History.push("/Homepage/Homepage");
   }
 };
 

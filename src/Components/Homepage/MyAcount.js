@@ -3,17 +3,17 @@ import { connect } from "react-redux";
 import { reset } from "../Actions/Index";
 const MyAcount = props => {
   return (
-    <div class="wrap">
-      <div class="card-container">
-        <div class="top-card" />
+    <div className="wrap">
+      <div className="card-container">
+        <div className="top-card" />
 
-        <div class="circle" />
+        <div className="circle" />
         <img
-          class="image-class"
+          className="image-class"
           src="https://image.flaticon.com/icons/svg/149/149071.svg"
           alt="avatar"
         />
-        <p class="title-text">{props.email}</p>
+        <p className="title-text">{props.email}</p>
       </div>
       <div className="button-section">
         <input

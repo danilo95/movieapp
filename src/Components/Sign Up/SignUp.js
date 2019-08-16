@@ -110,6 +110,7 @@ class SignUp extends Component {
                 name="tab"
                 className="sign-in"
                 checked
+                readOnly
               />
 
               <label htmlFor="tab-1" className="tab">
@@ -120,10 +121,10 @@ class SignUp extends Component {
                 <div className="sign-in-htm">
                   <div className="group">
                     <label htmlFor="user" className="label">
-                      Firstanem
+                      firstName
                     </label>
                     <Field
-                      name="firstanem"
+                      name="firstName"
                       type="text"
                       label="Firstname"
                       className="input"
@@ -316,7 +317,7 @@ class SignUp extends Component {
 const validate = ({
   email,
   passwordSing,
-  firstanem,
+  firstName,
   lastname,
   confirmPass,
   phone,
@@ -325,12 +326,12 @@ const validate = ({
   accept,
   birthdayDate,
   country,
-  gender
+  countryState
 }) => {
   const errors = {};
   errors.email = emailValidation(email);
   errors.passwordSing = required(passwordSing);
-  errors.firstanem = inputValidationLength(firstanem);
+  errors.firstName = inputValidationLength(firstName);
   errors.lastname = inputValidationLength(lastname);
   errors.confirmPass = passCheck(passwordSing, confirmPass);
   errors.phone = numberValidation(phone);
@@ -340,6 +341,7 @@ const validate = ({
   errors.accept = required(accept);
   errors.birthdayDate = birthdayValidation(birthdayDate);
   errors.country = required(country);
+  errors.countryState = required(countryState);
   return errors;
 };
 

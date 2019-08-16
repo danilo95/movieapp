@@ -2,7 +2,7 @@ const initialState = {
   newUser: null,
   isLogin: false,
   email: null,
-  loading:false,
+  loading: false,
   loginError: " "
 };
 export default (state = initialState, action) => {
@@ -10,13 +10,13 @@ export default (state = initialState, action) => {
     case "NEW_USER":
       return {
         ...state,
-        newUser: action.payload,
+        newUser: action.payload
       };
     case "LOGIN":
       return {
         ...state,
         isLogin: true,
-        loading:false,
+        loading: false,
         loginError: " "
       };
     case "GET_SESSION_EMAIL":
@@ -28,21 +28,21 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loginError: action.payload,
-        loading:false,
+        loading: false
       };
-      case "DEFAULT_ERROR":
+    case "DEFAULT_ERROR":
       return {
         ...state,
         loginError: " "
       };
-      case "IS_LOADING":
+    case "IS_LOADING":
       return {
         ...state,
         loading: action.payload
       };
-      case "RESET":
+    case "RESET":
       return initialState;
-      
+
     default:
       return state;
   }

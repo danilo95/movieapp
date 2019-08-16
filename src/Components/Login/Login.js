@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import { emailValidation, required } from "../../Validation";
-import { loginUser,defaultError,loading } from "../Actions/Index";
+import { loginUser, defaultError, loading } from "../Actions/Index";
 import Loading from "../Loading/Loading";
 import History from "../History/History";
 import Modal from "../Modal/Modal";
@@ -14,7 +14,6 @@ class Login extends Component {
     this.state = { showModal: false };
   }
   componentDidMount() {
-    
     !this.props.isLogin
       ? History.push("/login")
       : History.push("/Homepage/Homepage");
@@ -56,10 +55,8 @@ class Login extends Component {
   };
 
   onSubmit(formValues) {
-    console.log('loading',this.props.loadingState)
-    this.props.loading()
+    this.props.loading();
     this.props.loginUser(formValues.email, formValues.passwordSing);
-    
   }
   render() {
     return (
@@ -70,7 +67,13 @@ class Login extends Component {
               onSubmit={this.props.handleSubmit(this.onSubmit)}
               className="ui form"
             >
-              <input type="radio" name="tab" className="sign-in" checked />
+              <input
+                type="radio"
+                name="tab"
+                className="sign-in"
+                checked
+                readOnly
+              />
               <label htmlFor="tab-1" className="tab">
                 Log In
               </label>
@@ -107,7 +110,7 @@ class Login extends Component {
                     <input type="submit" className="button" value="Sign In" />
                   </div>
                   <div className="hr" />
-                  {this.props.loadingState?<Loading/>:null}
+                  {this.props.loadingState ? <Loading /> : null}
                 </div>
               </div>
             </form>
@@ -145,7 +148,7 @@ const mapStateToProps = state => {
 };
 export default connect(
   mapStateToProps,
-  { loginUser,defaultError,loading }
+  { loginUser, defaultError, loading }
 )(
   reduxForm({
     form: "loginForm",

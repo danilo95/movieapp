@@ -9,16 +9,16 @@ class MovieList extends React.Component {
   render() {
     return (
       <>
-        <div class="movies-container">
+        <div className="movies-container">
           {this.props.movies.map((movie, index) => {
             return (
-              <div class="movie" key={index}>
+              <div className="movie" key={index}>
                 <img
                   src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                   alt="poster"
                 />
-                <div class="overlay">
-                  <div class="text">{movie.original_title}</div>
+                <div className="overlay">
+                  <div className="text">{movie.original_title}</div>
                   <br />
                 </div>
               </div>

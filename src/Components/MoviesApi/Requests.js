@@ -43,7 +43,6 @@ export const getMovies = () => {
     }&language=en-US&page=1`
   )
     .then(response => {
-      console.log(response.data.results);
       return response.data.results;
     })
     .catch(error => {
