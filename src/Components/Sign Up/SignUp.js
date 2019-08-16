@@ -17,7 +17,7 @@ class SignUp extends Component {
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
-    this.state = { showModal: false, showSubSelect: false };
+    this.state = { showModal: false, showSubSelect: false, countryStates: [] };
   }
 
   handlerModal = () => {
@@ -31,10 +31,23 @@ class SignUp extends Component {
   countryStates = e => {
     if (e.target.value) {
       this.setState({ showSubSelect: true });
+      this.getCountryStates(e.target.value);
     } else {
       this.setState({ showSubSelect: false });
     }
   };
+
+  getCountryStates(option) {
+    let selectedOption = option.replace(/['"]+/g, "");
+
+    const result = StatesofCountries.filter(mainstate => {
+      if (mainstate.Country === selectedOption) {
+        return mainstate;
+      }
+    });
+    this.setState({ countryStates: result });
+  }
+
   renderError({ error, touched }) {
     if (touched && error) {
       return (
@@ -66,7 +79,7 @@ class SignUp extends Component {
     return (
       <div className="field">
         <select {...input} className={className}>
-          <option value="">Select a Country</option>
+          <option value="">Select a Value</option>
           {options.map(option => (
             <option key={option.id} value={JSON.stringify(option.value)}>
               {option.value}
@@ -232,11 +245,10 @@ class SignUp extends Component {
                         State
                       </label>
                       <Field
-                        name="country"
+                        name="countryState"
                         className="input"
-                        onChange={event => this.countryStates(event)}
                         component={this.renderSelect}
-                        options={StatesofCountries}
+                        options={this.state.countryStates}
                       />
                     </div>
                   ) : null}
